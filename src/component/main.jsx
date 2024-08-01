@@ -1,26 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View } from "react-native";
+import { NativeRouter } from "react-router-native";
+import RouterOulet from "./routes/rutas";
+import Navbar from "./appBars/appbbar";
+import Constants from "expo-constants";
 
 export default function Main() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-
-      <Text>esta modificacion la hiso adrian</Text>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-      <Text>Cambio numero dos</Text>
-      <StatusBar style="auto"/>
+    <NativeRouter>
+      <View style={styles.container}>
+        <View style={styles.paginador}>
+          <RouterOulet />
+        </View>
+        <Navbar></Navbar>
+        <StatusBar style="auto" />
       </View>
+    </NativeRouter>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+  }
+  ,
+  paginador: {
+    borderWidth: 1,
+    height: '90%',
+    paddingTop: Constants.statusBarHeight + 10,
+  }
 });
