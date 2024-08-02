@@ -50,7 +50,7 @@ export default function Navbar() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'blue',
+    backgroundColor: '#123',
     paddingTop: 10,
     flexDirection: "row",
     alignItems: "center",
@@ -58,10 +58,10 @@ const styles = StyleSheet.create({
     height:'10%'
   },
   text: {
-    color: 'white',
+    color: '#fff',
   },
   active: {
-    color: "white",
+    color: "#fff",
   },
   inactive: {
     color: "rgb(180, 182, 182)",

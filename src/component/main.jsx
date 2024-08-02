@@ -4,15 +4,18 @@ import { NativeRouter } from "react-router-native";
 import RouterOulet from "./routes/rutas";
 import Navbar from "./appBars/appbbar";
 import Constants from "expo-constants";
+import { useState } from "react";
 
 export default function Main() {
+  const [Islogin,setislogin]=useState(false);
+
   return (
     <NativeRouter>
       <View style={styles.container}>
         <View style={styles.paginador}>
           <RouterOulet />
         </View>
-        <Navbar></Navbar>
+        { Islogin &&<Navbar></Navbar>}
         <StatusBar style="auto" />
       </View>
     </NativeRouter>
@@ -26,8 +29,7 @@ const styles = StyleSheet.create({
   }
   ,
   paginador: {
-    borderWidth: 1,
-    height: '90%',
+    flex:1,
     paddingTop: Constants.statusBarHeight + 10,
   }
 });
