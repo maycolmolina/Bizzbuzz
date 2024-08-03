@@ -21,27 +21,27 @@ export default descripcionNegocioScreen=({navigation,route})=>{
         }
 
         try {
-        //   const response= await axios.post('http://192.168.218.44:3500/Emprendedor',{
-        //         Emprendedor:{
-        //             nombre,
-        //             correo,
-        //             password,
-        //             telefono
-        //         },
-        //         descripcionNegocio:{
-        //             nombreNegocio,
-        //             direccion,
-        //             descripcion,
-        //             verificacion
-        //         }
-        //     });
-        //     if (response.status===201)
-        //     { setModalVisible(true)
-        //         setNombreNegocio('')
-        //         setDireccion('')
-        //         setDescripcion('')
-        //         setVerificacion('')
-        //     }
+          const response= await axios.post('http://192.168.218.44:3500/Emprendedor',{
+                Emprendedor:{
+                    nombre,
+                    correo,
+                    password,
+                    telefono
+                },
+                descripcionNegocio:{
+                    nombreNegocio,
+                    direccion,
+                    descripcion,
+                    verificacion
+                }
+            });
+            if (response.status===201)
+            { setModalVisible(true)
+                setNombreNegocio('')
+                setDireccion('')
+                setDescripcion('')
+                setVerificacion('')
+            }
         } catch (error) {
             console.log(error)
         }

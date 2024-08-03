@@ -37,12 +37,6 @@ export default function Navbar() {
       <Appbartab style={{ margin: 5 }} to="/">
           home
         </Appbartab>
-        <Appbartab style={{ margin: 5 }} to="/logincliente">
-          cliente
-        </Appbartab>
-        <Appbartab style={{ margin: 5 }} to="/loginEmprendedor">
-          emrendedor
-        </Appbartab>
       </ScrollView>
     </View>
   );

@@ -7,8 +7,7 @@ import Constants from "expo-constants";
 import { useState } from "react";
 
 export default function Main() {
-  const [Islogin,setislogin]=useState(false);
-
+  const [Islogin,setislogin]=useState(true);
   return (
     <NativeRouter>
       <View style={styles.container}>

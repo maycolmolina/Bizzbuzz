@@ -1,4 +1,5 @@
 import { View,Text,StyleSheet,TouchableOpacity } from 'react-native'
+import { colors } from '../../theme/colors'
 
 
 export default  Botonstandar=({onPress,texto,colorB,widthB,colortext})=>{
@@ -12,7 +13,7 @@ export default  Botonstandar=({onPress,texto,colorB,widthB,colortext})=>{
         colortext && {color:colortext},
     ]
     return(
-        <TouchableOpacity style={widthB && {width:widthB}} onPress={onPress}>
+        <TouchableOpacity style={[widthB && {width:widthB},{marginHorizontal:5}]} onPress={onPress}>
             <View style={styless}>
                 <Text style={textoestilo}>{texto}</Text>
             </View>
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
         borderRadius:8,
     },
     colorBoton:{
-        backgroundColor:'#279'
+        backgroundColor:colors.palette.primary.blue
     },
     textoBoton:{
         color:'white',
