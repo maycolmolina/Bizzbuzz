@@ -9,7 +9,7 @@ export default function CreacionNegocio() {
   return (
     <NavigationContainer>
      <Stack.Navigator initialRouteName='loginemprendedor'>
-      <Stack.Screen name='Emprendedor' component={loginemprendedor}/>
+      <Stack.Screen name='EMPRENDEDOR' component={loginemprendedor}/>
       <Stack.Screen name='Descripcion Negocio' component={descripcionNegocio}/>
      </Stack.Navigator>
     </NavigationContainer>

@@ -4,6 +4,7 @@ import Botonstandar from '../component.perzonalizados/botonstandar'
 import { useState } from 'react'
 import { colors } from '../../theme/colors'
 import { useNavigate } from 'react-router-native'
+import axios from 'axios'
 export default Loginhow = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -46,6 +47,8 @@ export default Loginhow = () => {
         console.log(email)
         console.log(password)
         console.log(tipouser)
+        // let result =axios.post('',{})
+        
     }
 
     return (
@@ -90,7 +93,7 @@ export default Loginhow = () => {
                     <Text style={{fontSize:20}}>Elige el tipo de cuenta que tienes</Text>
                     <View style={styles.flex}>
                         <Botonstandar onPress={() => loguearse('cliente')} widthB='45%' texto='cliente'></Botonstandar>
-                        <Botonstandar colorB={colors.palette.secondary.green} onPress={() => loguearse('propietario')} widthB='45%' texto='emprend.'></Botonstandar>
+                        <Botonstandar colorB={colors.palette.secondary.green} onPress={() => loguearse('emprendedor')} widthB='45%' texto='emprend.'></Botonstandar>
                     </View>
                 </View>
             </View>}

@@ -6,8 +6,9 @@ import Navbar from "./appBars/appbbar";
 import Constants from "expo-constants";
 import { useState } from "react";
 
+
 export default function Main() {
-  const [Islogin,setislogin]=useState(true);
+  const [Islogin,setislogin]=useState(false);
   return (
     <NativeRouter>
       <View style={styles.container}>

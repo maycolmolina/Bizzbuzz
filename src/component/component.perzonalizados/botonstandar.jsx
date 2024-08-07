@@ -2,11 +2,12 @@ import { View,Text,StyleSheet,TouchableOpacity } from 'react-native'
 import { colors } from '../../theme/colors'
 
 
-export default  Botonstandar=({onPress,texto,colorB,widthB,colortext})=>{
+export default  Botonstandar=({borde,onPress,texto,colorB,widthB,colortext})=>{
     const styless=[
         styles.container,
         colorB && {backgroundColor:colorB},
         !colorB && styles.colorBoton,
+        borde && {borderWidth:1},
     ]
     const textoestilo=[
         styles.textoBoton,

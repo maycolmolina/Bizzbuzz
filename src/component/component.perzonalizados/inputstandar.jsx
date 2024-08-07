@@ -10,7 +10,7 @@ const Inputt=({Width,name,error,style,...props})=>{
     ]
     return(
         <View style={{width:Width}}>           
-            <TextInput   style={inputstyle} placeholder={name} {...props}></TextInput>
+            <TextInput    style={inputstyle} placeholder={name} {...props}></TextInput>
             {error &&
                 <Text style={styles.error}> {error} </Text>
             }
