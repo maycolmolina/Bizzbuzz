@@ -4,18 +4,61 @@ import { NativeRouter } from "react-router-native";
 import RouterOulet from "./routes/rutas";
 import Navbar from "./appBars/appbbar";
 import Constants from "expo-constants";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { getData } from "../services/localstorage";
+import NavbarEmprendedor from '../component/appBars/appbaremprendedor'
+import { removeData } from "../services/localstorage";
 
 export default function Main() {
-  const [Islogin,setislogin]=useState(false);
+  const [Islogin, setislogin] = useState(false);
+  const [userTipo, setuserTipo] = useState('cliente');
+  
+
+  useEffect(() => {
+    // removeData()
+    setInterval(verstatdoUsuario, 100);
+    return () => {
+      clearInterval(verstatdoUsuario);
+    };
+
+  }, [])
+
+  function verstatdoUsuario() {
+    loginis().then(isLoggedIn => {
+      setislogin(isLoggedIn);
+    }).catch(error => {
+      console.error('Error al verificar el estado de inicio de sesión:', error);
+    });
+  }
+
+  async function loginis() {
+    try {
+      const user = await getData('user');
+      if (user === null) {
+        setuserTipo('cliente')
+        return false;
+      } else {
+        let tipo = JSON.parse(user).Id_descripcionNegocio
+        if (tipo != null && tipo != undefined) {
+          setuserTipo('emprendedor');
+        } else {
+          setuserTipo('cliente')
+        }
+        return true;
+      }
+    } catch (error) {
+      console.error('Error al verificar el estado de inicio de sesión:', error);
+      return false; // Si hay un error, asumimos que el usuario no está autenticado
+    }
+  }
   return (
     <NativeRouter>
       <View style={styles.container}>
         <View style={styles.paginador}>
           <RouterOulet />
         </View>
-        { Islogin &&<Navbar></Navbar>}
+        {Islogin && userTipo==='cliente' && <Navbar></Navbar>}
+        {Islogin && userTipo==='emprendedor' && <NavbarEmprendedor></NavbarEmprendedor>}
         <StatusBar style="auto" />
       </View>
     </NativeRouter>
@@ -29,7 +72,7 @@ const styles = StyleSheet.create({
   }
   ,
   paginador: {
-    flex:1,
+    flex: 1,
     paddingTop: Constants.statusBarHeight + 10,
   }
 });

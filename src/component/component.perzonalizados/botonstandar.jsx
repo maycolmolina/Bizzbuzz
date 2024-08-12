@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
         borderRadius:8,
     },
     colorBoton:{
-        backgroundColor:colors.palette.primary.blue
+        backgroundColor:colors.palette.primary.principal
     },
     textoBoton:{
-        color:'white',
+        color:colors.palette.neutral.letracolorclara,
         fontWeight:'bold',
         textAlign:'center',
         fontSize:22,

@@ -1,19 +1,19 @@
 import React from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { Link, useLocation } from "react-router-native";
 import { colors } from "../../theme/colors";
-import { Shoticons,Whatsappicon, Homeicons, Perfil, Logouticon, Visitaricons,GoogleMaps,Notifications ,Capture,Cameraicon} from '../../icons/iconos'
+import {Emailicons, Shoticons,Agendaicons, Homeicons,Config, Helpicons, GoogleMaps,Notifications ,Capture,Cameraicon} from '../../icons/iconos'
 const icons = {
-  'whatsapp': Whatsappicon,
+  'agenda': Agendaicons,
   'home': Homeicons,
-  'perfil': Perfil,
-  'logout': Logouticon,
-  'visit': Visitaricons,
+  'ajustes': Config,
+  'Guia': Helpicons,
   'maps':GoogleMaps,
   'notifications': Notifications,
   'blanco':Shoticons,
   'capture': Capture,
-  'camera': Cameraicon
+  'camera': Cameraicon,
+  'email': Emailicons,
 }
 const AppbartabIcon = ({ to, style, nameicon }) => {
   const { pathname } = useLocation()
@@ -55,20 +55,20 @@ const Appbartab = ({ children, to, style }) => {
 
 
 
-export default function Navbar() {
+export default function NavbarEmprendedor() {
   return (
     <View style={styles.container}>
         <AppbartabIcon  to='/' nameicon='home'/>
-        <AppbartabIcon to='/#' nameicon='maps'/>
-        <AppbartabIcon to='/#' nameicon='blanco'/>
-        <AppbartabIcon to='/#' nameicon='notifications'/>
-        <AppbartabIcon to='/#' nameicon='capture'/>
+        <AppbartabIcon to='/notificacionesE' nameicon='notifications'/>
+        <AppbartabIcon to='/controlNegocio' nameicon='agenda'/>
+        <AppbartabIcon to='/AjustesE' nameicon='ajustes'/>
+        <AppbartabIcon to='/GuiayAyuda' nameicon='Guia'/>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.palette.primary.principal,
+    backgroundColor: colors.palette.secondary.segundooscuro,
     flexDirection: "row",
     alignItems: "center",
     minWidth: '100%',

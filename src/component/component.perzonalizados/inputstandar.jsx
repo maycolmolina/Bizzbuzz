@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, TextInput,View,Text} from 'react-native'
+import { colors } from '../../theme/colors'
 
 const Inputt=({Width,name,error,style,...props})=>{
 
@@ -22,7 +23,7 @@ const Inputt=({Width,name,error,style,...props})=>{
 
 const styles=StyleSheet.create({
     error:{
-        color:'red',
+        color:colors.palette.error.error,
     },
     inputsty: {
         backgroundColor:'#fff', 

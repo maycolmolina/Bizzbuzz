@@ -1,4 +1,5 @@
 import { View,Text,StyleSheet } from 'react-native'
+import { colors } from '../../theme/colors'
 
 
 export default function Loadincomponet({texto}) {
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
     cargatext:{
         fontSize:40,
         fontWeight: 'bold',
-        color:'#fff',
+        color:colors.palette.neutral.letracolorclara,
         textAlign:'center'
     },
     espera: {
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius:8,
         alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.8)',
+        backgroundColor: colors.palette.opacity.semiTransparentDark,
         position: 'absolute',
         top: 0,
         left: 0,

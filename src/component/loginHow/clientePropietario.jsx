@@ -35,7 +35,6 @@ export default ElegirtipoDeCuenta = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.palette.neutral.white,
         alignItems: 'center',
         paddingHorizontal: 20
     },
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
         marginVertical: 40,
         fontSize: 25,
         fontWeight: 'bold',
-        color: colors.palette.primary.blue,
+        color: colors.palette.primary.principal,
     },
     textoinfor: {
         textAlign: 'justify',

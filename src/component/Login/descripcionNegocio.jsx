@@ -14,7 +14,7 @@ export default descripcionNegocioScreen = ({ navigation, route }) => {
     const [verificacion, setVerificacion] = useState('')
     const [modalVisible, setModalVisible] = useState(false)
     const [telefonoListo, setTelefonoListo] = useState('');
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     //   controladores de errores
     const [nombreNegocioE, setNombreNegocioE] = useState('')
