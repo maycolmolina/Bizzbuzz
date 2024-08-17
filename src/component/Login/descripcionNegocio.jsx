@@ -4,7 +4,9 @@ import axios from 'axios'
 import Inputt from '../component.perzonalizados/inputstandar'
 import Botonstandar from '../component.perzonalizados/botonstandar'
 import Loadincomponet from '../component.perzonalizados/cargandocomponente'
-
+import { saveData} from '../../services/localstorage'
+import { useNavigate } from 'react-router-native'
+import ipdelservidor from '../../servidorconnect/ipdelservidor'
 
 export default descripcionNegocioScreen = ({ navigation, route }) => {
     const { nombre, correo, password, telefono, paistelefono } = route.params
@@ -15,7 +17,7 @@ export default descripcionNegocioScreen = ({ navigation, route }) => {
     const [modalVisible, setModalVisible] = useState(false)
     const [telefonoListo, setTelefonoListo] = useState('');
     const [loading, setLoading] = useState(false);
-
+    const ruta=useNavigate()
     //   controladores de errores
     const [nombreNegocioE, setNombreNegocioE] = useState('')
     const [direccionE, setDireccionE] = useState('')
@@ -104,13 +106,15 @@ export default descripcionNegocioScreen = ({ navigation, route }) => {
             }
         }
         try {
-            const response = await axios.post('https://proyecto-chat-e71cc-default-rtdb.firebaseio.com/useremprendedor.json', data);
+            const response = await axios.post(ipdelservidor+'/useremprendedor.json', data);
             if (response.status === 201) {
                 setModalVisible(true)
                 setNombreNegocio('')
                 setDireccion('')
                 setDescripcion('')
                 setVerificacion('')
+                saveData(JSON.stringify(data));
+                ruta.navigate('/')
             }
         } catch (error) {
             Alert.alert(error.message)

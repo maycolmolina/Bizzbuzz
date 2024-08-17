@@ -3,10 +3,10 @@ import Inputt from '../component.perzonalizados/inputstandar'
 import Botonstandar from '../component.perzonalizados/botonstandar'
 import { useState } from 'react'
 import { colors } from '../../theme/colors'
-import { json, useNavigate } from 'react-router-native'
+import {  useNavigate } from 'react-router-native'
 import axios from 'axios'
-import { removeData, saveData } from '../../services/localstorage'
-
+import { saveData } from '../../services/localstorage'
+import ip from '../../servidorconnect/ipdelservidor'
 
 
 
@@ -51,7 +51,7 @@ export default Loginhow = () => {
         console.log('hola')
         setMostraModal(false)
         try {
-            let result = await axios.post('http://192.168.125.154:3000/user', {
+            let result = await axios.post(ip+'/user', {
                 correo: email,
                 password: password,
                 table: tipouser
