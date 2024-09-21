@@ -1,7 +1,7 @@
 
 
 
-//Primeramente calculamos el margen de ganancia
+//Primeramente calculamos el margen de ganancia y lo renovamos
 
 export const calcularMargenGanancia=(renovacion,costo)=>{
 
