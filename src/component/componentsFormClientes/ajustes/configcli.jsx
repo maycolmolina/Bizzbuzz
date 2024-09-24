@@ -2,19 +2,16 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import { colors } from '../../../theme/colors'
 import OpcionesSettings from '../../component.perzonalizados/tabopctionconfiguraios'
 
-
-// se mostrara una pagina con diferentes opciones para que el usuario puede realizar diferentes opciones para la gestion ´
-// de la cuenta
-const AjustesE = () => {
+const AjustesCli = () => {
     return (
         <ScrollView style={styles.container}>
-            {/* <OpcionesSettings></OpcionesSettings> esto es un componete reutilizable para generar cada una de la opciones del usuario */}
-            <OpcionesSettings  nameicon='pencil' text='editar tienda'></OpcionesSettings>
-            <OpcionesSettings ruta='/EditarUsuario' nameicon='agenda' text='editar mi usuario'></OpcionesSettings>
-            <OpcionesSettings nameicon='email' text='realiza porceso de verificacion'></OpcionesSettings>
+            {/* aca estamos definiendo cada una de las acciones que puede realizar el cliente 
+            cada opción tiene una ruta donde lo llevata a un componente en especifico
+            que pueden verificar en la carpeta de routes en el archivo contenido dentro
+            */}
+            <OpcionesSettings ruta='./' nameicon='agenda' text='editar mi usuario'></OpcionesSettings>
             <OpcionesSettings nameicon='Guia' text='ayuda y soporte'></OpcionesSettings>
             <OpcionesSettings ruta='/salir' nameicon='close' text='cerrar session'></OpcionesSettings>
-
         </ScrollView>
     )
 };
@@ -30,4 +27,4 @@ const styles = StyleSheet.create({
     },
 
 });
-export default AjustesE
+export default AjustesCli

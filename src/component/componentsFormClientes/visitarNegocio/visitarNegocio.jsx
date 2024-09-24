@@ -1,25 +1,35 @@
+// en este apartado se renderizara cuando el cliente visite el negocio de un emprendedor 
+
+
 import { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native'
-import { colors } from '../../theme/colors'
-// importacion de los iconos
-import { Whatsappicon, Pencilicons, Addicons, Emailicons, Cameraicon } from '../../icons/iconos';
-import Cardcomponent from '../component.perzonalizados/cardpro';
+import { colors } from '../../../theme/colors'
+// importacion de los iconos que nosotros creamos en la app
+import { Whatsappicon, Pencilicons, Addicons, Emailicons, Cameraicon } from '../../../icons/iconos';
+import Cardcomponent from '../../component.perzonalizados/cardpro';
 import { useNavigate } from 'react-router-native';
 import axios from 'axios';
-import ip from '../../servidorconnect/ipdelservidor'
+import ip from '../../../servidorconnect/ipdelservidor'
+import { useParams } from 'react-router-native';
 
-
-export default HomeEmprendedro = ({ usuario }) => {
-    // este usuario lo mandamos a traves de los parametros que recibe este componente en este caso "usuario"
-    const [emprendedor, setemprendedor] = useState(usuario)
+export default VisitEmprendedor = () => {
+    // a traves de react native  routes navegamos a esta pagina en especifico y mandamos un id por la url y lo capturamos usando el 
+    // useParams para que con ese id miremos el negocio del emprendedor
+    const { id } = useParams();
+    const [emprendedor, setemprendedor] = useState({})
     const [descripcionNegocio, setDescripcionN] = useState([]);
     const navigate = useNavigate();
-    // se ejecutara mientras se carga el componente 
+
     useEffect(() => {
         (async () => {
             try {
-                // obtenemos el negocio del propio emprendedor logueado para que vea su perfil en el home 
-                const result = await axios.get(ip+"3000/descripcionNEGOCIO/1")
+                // se obtiene el usuario del emprendedor por id
+                const resultuser= await axios.get(ip+'3000/obteneruser/'+id)
+
+                const {user}=resultuser.data;
+                setemprendedor(user);
+                // se obtiene la descripcion del negocio del emprendedor por id
+                const result = await axios.get(ip+"3000/descripcionNEGOCIO/"+user.Id_descripcionNegocio)
                 setDescripcionN(result.data.tienda)
             } catch (err) {
                 console.error(err)
@@ -29,34 +39,26 @@ export default HomeEmprendedro = ({ usuario }) => {
     function navegar(value) {
         navigate(value);
     }
-    // https://phantom-marca.unidadeditorial.es/cb5559a4d1798146b0b02dbbca5029d9/resize/1320/f/jpg/assets/multimedia/imagenes/2022/09/23/16638898611409.jpg
     return (
         <ScrollView>
-            {/* mostramos toda el home de usuario con los datos asociados a su cuenta  */}
             <View style={styles.container}>
                 <View style={{ width: '100%', height: 'auto', alignItems: 'center' }}>
                     <View style={styles.inicio} >
                         <Text style={styles.negocioName}>{descripcionNegocio.nombre}</Text>
                     </View>
+                    {/* aca se muestra la img relacionada al negocio */}
                     <View style={styles.imagencont}>
                         <Image
                             style={styles.logo}
                             source={{ uri: 'https://www.somosmamas.com.ar/wp-content/uploads/2019/01/cenas-ricas-y-faciles-club-house.jpg' }}
                         />
-                         <TouchableOpacity onPress={() => { navegar('CambiarImgTienda') }} style={styles.cambiarimagePort}>
-                            <Cameraicon width='20px' height='20px'></Cameraicon>
-                        </TouchableOpacity>
-
                     </View>
+                    {/* aca se muestra la img de perfil asociada al emprendedor*/}
                     <View style={styles.perfilImage}>
                         <Image
                             style={styles.imageperfil}
-                            source={{ uri: 'http://192.168.110.44:5100/imagenEmprendedor/'+emprendedor.id }}
+                            source={{ uri: 'https://phantom-marca.unidadeditorial.es/cb5559a4d1798146b0b02dbbca5029d9/resize/1320/f/jpg/assets/multimedia/imagenes/2022/09/23/16638898611409.jpg' }}
                         />
-                        <TouchableOpacity style={styles.cambiarimageP} onPress={() => { navegar('CambiarImgEmprendedor') }}>
-                            <Cameraicon width='10px' height='10px'></Cameraicon>
-                        </TouchableOpacity>
-
                     </View>
 
                     <View style={styles.adminname}>
@@ -71,37 +73,24 @@ export default HomeEmprendedro = ({ usuario }) => {
                 <View style={styles.funcion}>
                     <View style={styles.telefono}>
                         <Whatsappicon width='30px' height='30px'></Whatsappicon>
-                        <Text style={styles.botonTexto}>{usuario.telefono}</Text>
-                    </View>
-                    <View style={styles.editar}>
-                        <Pencilicons width='30px' height='30px'></Pencilicons>
-                        <TouchableOpacity onPress={() => { navegar('editarUsuario') }} >
-                            <Text style={[styles.botonTexto, { textDecorationLine: 'underline', color: 'blue' }]}>editar perfil</Text>
-                        </TouchableOpacity>
+                        <Text style={styles.botonTexto}>{emprendedor.telefono}</Text>
                     </View>
                     <View style={styles.editar}>
                         <Emailicons width='30px' height='30px'></Emailicons>
                         <TouchableOpacity>
-                            <Text style={styles.botonTexto}>{usuario.correo}</Text>
+                            <Text style={styles.botonTexto}>{emprendedor.correo}</Text>
                         </TouchableOpacity>
-                    </View>
-                    <View style={styles.aggpro}>
-                        <TouchableOpacity onPress={() => { navegar('Addpro') }}>
-                            <Addicons width='60px' height='60px'></Addicons>
-                        </TouchableOpacity>
-                        <Text style={styles.textoadd}>agregar prodcuto</Text>
                     </View>
                 </View>
                 <Text style={{ paddingHorizontal: 10 }}>productos y servicion:{10}</Text>
                 <ScrollView horizontal >
-                    {/* aca mostraremos a traves de metodo maps los productos que tiene el emprendedor logueado  */}
+                    {/* a trave se de un mapeo vamos a mostrar todos los productos que este emprendedor ha ofertado */}
                     <Cardcomponent nameboton='editar'></Cardcomponent>
                     <Cardcomponent nameboton='editar'></Cardcomponent>
                     <Cardcomponent nameboton='editar'></Cardcomponent>
                     <Cardcomponent nameboton='editar'></Cardcomponent>
                     <Cardcomponent nameboton='editar'></Cardcomponent>
                     <Cardcomponent nameboton='editar'></Cardcomponent>
-
                 </ScrollView>
 
             </View>
@@ -123,7 +112,7 @@ const styles = StyleSheet.create({
     inicio: {
         width: '100%',
         height: 150,
-        backgroundColor: colors.palette.secondary.segundooscuro,
+        backgroundColor: colors.palette.primary.principal,
         borderRadius: 10,
         alignItems: 'center',
         marginBottom: 110
@@ -149,22 +138,6 @@ const styles = StyleSheet.create({
         left: 40,
         backgroundColor: colors.palette.neutral.grisclaro,
         zIndex: 1000,
-    },
-    cambiarimageP: {
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
-        padding: 10,
-        backgroundColor: 'black',
-        borderRadius: 10,
-    },
-    cambiarimagePort:{
-        position: 'absolute',
-        bottom: 10,
-        right: 10,
-        padding: 10,
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        borderRadius: 10,
     },
     imageperfil: {
         borderWidth: 5,
@@ -207,12 +180,5 @@ const styles = StyleSheet.create({
         color: colors.palette.neutral.letracoloroscura,
 
     },
-    aggpro: {
-        position: 'absolute',
-        justifyContent: 'center',
-        alignItems: 'center',
-        right: 10,
-        top: 40
-    }
 }
 )

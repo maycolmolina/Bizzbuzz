@@ -1,8 +1,14 @@
+// menu del emprendedor donde se mostraran las acciones del cliente
+
+
 import React from "react";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { Link, useLocation } from "react-router-native";
 import { colors } from "../../theme/colors";
-import { Shoticons,Whatsappicon, Homeicons, Perfil, Logouticon, Visitaricons,GoogleMaps,Notifications ,Capture,Cameraicon} from '../../icons/iconos'
+import { Config, Shoticons,Whatsappicon, Homeicons, Perfil, Logouticon, Visitaricons,GoogleMaps,Notifications ,Capture,Cameraicon} from '../../icons/iconos'
+
+
+// constante que guarda a cada uno de los iconos importados
 const icons = {
   'whatsapp': Whatsappicon,
   'home': Homeicons,
@@ -13,8 +19,11 @@ const icons = {
   'notifications': Notifications,
   'blanco':Shoticons,
   'capture': Capture,
-  'camera': Cameraicon
+  'camera': Cameraicon,
+  'configuraciones':Config
 }
+
+//componente encargado de generar cada opcion del menu principal
 const AppbartabIcon = ({ to, style, nameicon }) => {
   const { pathname } = useLocation()
   const active = pathname === to
@@ -32,28 +41,9 @@ const AppbartabIcon = ({ to, style, nameicon }) => {
     </View>
   )
 }
-const Appbartab = ({ children, to, style }) => {
-  const { pathname } = useLocation();
-  const active = pathname === to;
-  const estilos = [
-    style,
-    active == true && styles.active,
-    active == false && styles.inactive,
-  ];
-  return (
-    <View style={style}>
-      <Link to={to}>
-        <Text style={estilos}>
-          {children}
-        </Text>
-      </Link>
-    </View>
-  );
-};
 
 
-
-
+// constante del menu principal para ser usado en otro componente
 
 export default function Navbar() {
   return (
@@ -61,7 +51,7 @@ export default function Navbar() {
         <AppbartabIcon  to='/' nameicon='home'/>
         <AppbartabIcon to='/#' nameicon='maps'/>
         <AppbartabIcon to='/#' nameicon='blanco'/>
-        <AppbartabIcon to='/#' nameicon='notifications'/>
+        <AppbartabIcon to='/AjustesCli' nameicon='configuraciones'/>
         <AppbartabIcon to='/#' nameicon='capture'/>
     </View>
   );

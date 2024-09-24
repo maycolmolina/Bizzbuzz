@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Text, Image,Button} from 'react-native';
 import Botonstandar from './botonstandar'
 
+
+// componente resutillizable para ver los productos del emprendedor
 const Cardcomponent = ({onpress ,pro,nameboton}) => {
     return (
       <View style={styles.principalcard}>

@@ -51,7 +51,7 @@ export default Loginhow = () => {
         console.log('hola')
         setMostraModal(false)
         try {
-            let result = await axios.post(ip+'/user', {
+            let result = await axios.post(ip+'3000/user', {
                 correo: email,
                 password: password,
                 table: tipouser

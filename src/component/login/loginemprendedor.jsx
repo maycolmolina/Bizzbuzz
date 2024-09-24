@@ -1,9 +1,12 @@
+// componente en el cual iniciara el segmento de registro 
+//       donde el usuario va a poner sus datos
 import { useState } from 'react'
 import { View, Text, StyleSheet, Alert } from 'react-native'
 import Inputt from '../component.perzonalizados/inputstandar'
 import { Picker } from '@react-native-picker/picker'
 import Botonstandar from '../component.perzonalizados/botonstandar'
 import { colors } from '../../theme/colors'
+
 export default loginemprendedor = ({ navigation }) => {
 
   const [nombre, setNombre] = useState('')
@@ -14,14 +17,16 @@ export default loginemprendedor = ({ navigation }) => {
   const [paistelefono, setpaistelefono] = useState('+505')
 
 
-  // varaiables de eerores
+  // varaiables de eerores donde se controlaran los errores 
+  // o las validaciones de datos que el usuario ingrese
   const [nombreE, setNombreE] = useState('')
   const [correoE, setCorreoE] = useState('')
   const [passwordE, setPasswordE] = useState('')
   const [telefonoE, setTelefonoE] = useState('')
   const [confpasswordE, setConfPasswordE] = useState('')
 
-  // funciones de cambios en los input
+  // funciones de cambios en los input para que los input esten funcionado directamente con 
+  // los useState 
   function cambiarnombre(value) {
     setNombre(value)
     if (value.trim() == '') {
@@ -66,15 +71,18 @@ export default loginemprendedor = ({ navigation }) => {
     setpaistelefono(value)
   }
 
-  // funcion seguiente
+  // funcion seguiente para pasar al siguiente formulario en el cual ingresaremos los datos del negocio
   const handleFunction = async () => {
+    // si hay errores no continuara 
     if (await verificarE()) {
       Alert.alert('porfavor', 'Por favor, corrija los errores en los campos')
       return;
     }
+    // mandamos al otro formulario los dato de este formulario pata realizar un consolidado de datos 
     navigation.navigate('Descripcion Negocio', { nombre, correo, password, telefono,paistelefono })
 
   }
+  // esta es la funcion que verifica que no tenga ninguno de los campos llenos por el usuario ningun tipo de error 
   async function verificarE() {
    let errores = false;
 
@@ -109,7 +117,7 @@ export default loginemprendedor = ({ navigation }) => {
   return errores;
 
   }
-
+  // funcion para limpiar los input o las cajas de texto  
   const limpiarCampos = () => {
     setNombre('')
     setCorreo('')
@@ -118,6 +126,8 @@ export default loginemprendedor = ({ navigation }) => {
   }
   return (
     <View style={styles.container}>
+      {/* los imput son etiquetas personalizadas creadas para que laas podamos reutilizar en toda la app 
+      usando el comcepto de componetizacion */}
       <Inputt
         name='Nombre'
         onChangeText={(value) => { cambiarnombre(value) }}
@@ -165,8 +175,10 @@ export default loginemprendedor = ({ navigation }) => {
         />
       </View>
       <Text></Text><Text></Text><Text></Text>
+      {/* boton para pasar al siguente formulario  */}
       <Botonstandar borde    onPress={handleFunction} texto='siguiente' />
       <Text></Text>
+      {/* boton para limpiar las cajas de texto  */}
       <Botonstandar borde colortext={colors.palette.neutral.darkGray} colorB={colors.palette.neutral.lightGray} onPress={limpiarCampos} texto='limpiar' />
     </View>
   )

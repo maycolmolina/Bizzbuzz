@@ -4,6 +4,9 @@ import Botonstandar from '../component.perzonalizados/botonstandar'
 import { useNavigate } from 'react-router-native'
 import {removeData} from '../../services/localstorage'
 
+
+
+// este es un componente que se mostrara cuando queramos cerrar la sesion iniciada
 export default Salir =()=>{
     const ruta = useNavigate();
     async function salir(){
@@ -11,7 +14,7 @@ export default Salir =()=>{
         ruta('../login');
     }
     function canceled(){
-        ruta('../AjustesE');
+        ruta('../');
     }
     return(
         <View style={styles.salir}>

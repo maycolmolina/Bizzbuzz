@@ -1,7 +1,11 @@
 import { View,Text,StyleSheet,TouchableOpacity } from 'react-native'
+// importacion de tema
 import { colors } from '../../theme/colors'
 
 
+
+// componente para generar el boton standar en la app, tiene sus propios estilos y puede ser reutilizado en cualquier
+// parte de la aplicación
 export default  Botonstandar=({borde,onPress,texto,colorB,widthB,colortext})=>{
     const styless=[
         styles.container,

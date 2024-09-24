@@ -13,8 +13,11 @@ import CambiarImgEmprendedor from "../componentsForEmprendedor/imageperfilempren
 import CambiarImgTienda from "../componentsForEmprendedor/tiendaimagen";
 import Salir from "../logout/salir";
 import EditarUsuario from "../componentsForEmprendedor/editarmicuenta/editarusuario";
+import VisitEmprendedor from "../componentsFormClientes/visitarNegocio/visitarNegocio";
+import AjustesCli from "../componentsFormClientes/ajustes/configcli";
 export default function RouterOulet() {
   return (
+    // en este componente nosotros definimos las rutas y los componentes
     <Routes>
       <Route path="/logincliente" element={<LoginCliente />} />
       <Route path="/loginEmprendedor" element={<CreacionNegocio/>} />
@@ -30,6 +33,8 @@ export default function RouterOulet() {
       <Route path="/salir" element={<Salir />} />  
       <Route path="/" element={<Home/>}/> 
       <Route path="/editarUsuario" element={<EditarUsuario />} />
+      <Route path="/visitarNegocio/:id" element={<VisitEmprendedor />} />
+      <Route path="/AjustesCli" element={<AjustesCli />} />
     </Routes>
   );
 }

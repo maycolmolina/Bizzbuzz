@@ -7,16 +7,19 @@ import HomeCliente from './home.cliente'
 
 
 const Home = () => {
+    // aca es el home general
     const [usuario,setusuario] = useState({})
     const [tipo, settipo] = useState('')
     const ruta = useNavigate();
     useEffect(() => {
         (async ()=>{
+            // verifico que el usuario este logueado en caso de no estar logueado lo redirijo al login
             if (await loginis() === false) {
                 navegar('Login')
             }
         })()
     }, [])
+    // funcion que sirve para navegar a traves de la app 
     function navegar(value) {
         ruta(value);
     }
@@ -28,6 +31,8 @@ const Home = () => {
             if (user === null) {
                 return false;
             } else {
+                // en caso de estar logueado verifico que tipo de usuario esta
+                // ya que con eso verificamos que home debemos de cargar
                 setusuario(JSON.parse(user));
                 if(JSON.parse(user).Id_descripcionNegocio==null && JSON.parse(user).Id_descripcionNegocio==undefined) {
                     settipo('cliente')
@@ -43,6 +48,7 @@ const Home = () => {
     }
     return (
         <View style={styles.container}>
+             {/* dependiendo de el tipo de usuario que este logueado vamos a cargar un home en especifico */}
              { tipo==='emprendedor' &&   <HomeEmprendedor usuario={usuario}></HomeEmprendedor>}
              { tipo==='cliente' && <HomeCliente cliente={usuario}></HomeCliente>}
         </View>

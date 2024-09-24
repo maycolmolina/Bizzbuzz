@@ -84,7 +84,7 @@ export default LoginCliente = () => {
         };
         try{
         // hacer peticion al backend para registrar el cliente
-        await axios.post(ip+'/newuserC',cliente)
+        await axios.post(ip+'3000/newuserC',cliente)
         await saveData('user',JSON.stringify(cliente))
         ruta('/')
         Alert.alert('Registro exitoso', 'Te has registrado correctamente')

@@ -36,6 +36,9 @@ const Addpro = () => {
 
     useEffect(() => {
         (async () => {
+            // esta funcion es para pedir permisos al dispositivo de acceder a su galeria para poder asiciar una imagen 
+            // al  producto que vamos a publicar
+
             if (Platform.OS != 'web') {
                 const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
                 if (status !== 'granted') {
@@ -44,12 +47,13 @@ const Addpro = () => {
             }
         })();
         (async () => {
+            // obtener los datos del usuario logueado desde el localstorage
             let id = await getData('user');
             id = await JSON.parse(id).id;
             setiduser(id);
         })()
     }, [])
-    //funciones de cambio
+    //funciones de cambio o de onChangeText
     const cambiarCategoria = (value) => {
         if (value === undefined) {
             seterrorcategoria('seleccione una categoria');
@@ -88,7 +92,7 @@ const Addpro = () => {
             seterrordescripcion('');
         }
     }
-    //funcion de envio busquede de errores y limpieza
+    // limpiar campos
     function limpiar(){
         setNombre('');
         setDescripcion('');
@@ -105,6 +109,8 @@ const Addpro = () => {
         seterrorfoto(null);
         seterrormoneda(null);
     }
+    //funcion de envio busquede de errores y limpieza
+    
     async function buscarErrores() {
         let error = false;
         //errores de nombre
@@ -143,16 +149,18 @@ const Addpro = () => {
     async function enviar() {
 
         let error = await buscarErrores();
+        // retornar si hay errores
         if (error) {
             return;
         }
         try {
             setloading(true);
+            // verificar si tenemos conexion
             let netifo = await NetInfo.fetch()
             if (!netifo.isInternetReachable) {
                 throw new Error('no tienes acceso a internet');
             }
-
+            // preparación de producto
             let producto = {
                 Nombre: Nombre,
                 Descripcion: Descripcion,
@@ -178,7 +186,7 @@ const Addpro = () => {
             quality: 0.8,
         })
         if (!result.cancelled) {
-            await setImageUri(result.assets[0].uri);
+            setImageUri(result.assets[0].uri);
             let imgcomplet = await fetch(result.assets[0].uri);
             const image = await imgcomplet.blob();
             setImage(image);
@@ -188,8 +196,6 @@ const Addpro = () => {
 
     return (
         <View style={{ flex: 1 }} >
-
-
             <ScrollView>
                 <Text style={styles.titulo}>agrega el nuevo producto</Text>
                 <Inputt error={errorname} onChangeText={value => { cambiarnombre(value) }} value={Nombre} name='Nombre'></Inputt>
@@ -213,6 +219,8 @@ const Addpro = () => {
                     value={categoria}
                 />
                 {errorcategoria && <Text style={styles.errors}> {errorcategoria} </Text>}
+                {/* aca usamos el componente inpuut que es un componente personalizado para poder mostrar de una
+                manera mad perzonalizada los errores */}
                 <Inputt error={errordescripcion} onChangeText={value => cambiarDescripcion(value)} value={Descripcion} name='Descripcion'></Inputt>
                 <Inputt error={errorprecio} onChangeText={value => { cambiarprecio(value) }} value={precio} name='precio'></Inputt>
                 <RNPickerSelect
@@ -250,6 +258,7 @@ const Addpro = () => {
                 <Botonstandar colorB={colors.palette.secondary.segundooscuro} onPress={enviar} texto='publicar' ></Botonstandar>
                 <Text></Text>
             </ScrollView>
+            {/* esto se mostrara cuando se este enviando el producto */}
             {loading && <View style={styles.espera}>
                 <Text style={styles.cargatext}>publicando tu producto</Text>
                 <Loadingicon fill='#fff' width='200px' height='200px'></Loadingicon>
@@ -257,6 +266,7 @@ const Addpro = () => {
         </View>
     )
 };
+// exportación para poder ser usado en al app
 export default Addpro
 
 const styles = StyleSheet.create({

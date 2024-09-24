@@ -13,7 +13,7 @@ export default function Main() {
   const [Islogin, setislogin] = useState(false);
   const [userTipo, setuserTipo] = useState('cliente');
   
-
+  // componente principal que se cargara de inicio cuando arranque la aplicacion
   useEffect(() => {
     // removeData()
     setInterval(verstatdoUsuario, 100);
