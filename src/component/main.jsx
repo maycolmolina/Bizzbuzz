@@ -13,9 +13,10 @@ export default function Main() {
   const [Islogin, setislogin] = useState(false);
   const [userTipo, setuserTipo] = useState('cliente');
   
-
+  // componente principal que se cargara de inicio cuando arranque la aplicacion
   useEffect(() => {
     // removeData()
+    // esta funcion verifica que se este actualizando en tiempo real si el usuario tiene una cuenta activa o si ya no esta logueado
     setInterval(verstatdoUsuario, 100);
     return () => {
       clearInterval(verstatdoUsuario);

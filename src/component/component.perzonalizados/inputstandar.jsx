@@ -2,7 +2,8 @@ import React from 'react'
 import { StyleSheet, TextInput,View,Text} from 'react-native'
 import { colors } from '../../theme/colors'
 
-const Inputt=({Width,name,error,style,...props})=>{
+// una caja imput personalizada para poder ser utilizada en cualquier parte de la app
+const Inputt=({Width,name,error,style,...props})=>{ 
 
     const inputstyle=[
         error && styles.error,
@@ -11,7 +12,7 @@ const Inputt=({Width,name,error,style,...props})=>{
     ]
     return(
         <View style={{width:Width}}>           
-            <TextInput    style={inputstyle} placeholder={name} {...props}></TextInput>
+            <TextInput   style={inputstyle} placeholder={name} {...props}></TextInput>
             {error &&
                 <Text style={styles.error}> {error} </Text>
             }

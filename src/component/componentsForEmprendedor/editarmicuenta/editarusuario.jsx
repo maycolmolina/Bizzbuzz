@@ -1,3 +1,6 @@
+// en este componente se busca que el usuario pueda modificar sus credenciales 
+
+
 import { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, Alert } from 'react-native'
 import Inputt from '../../component.perzonalizados/inputstandar'
@@ -22,10 +25,12 @@ export default EditarUsuario = ( ) => {
   const [telefonoE, setTelefonoE] = useState('')
 
   useEffect(()=>{
+    // esto se ejecutara a la hora que se recargue esta seccion
     (async()=>{
+      // obtiene las credenciales del  usuario logueado desde el localstorage
         let user=await getData('user')
         user=JSON.parse(user)
-        console.log(' hooola que tal i')
+        // rellena los imput con los valores actuales del usuario
         setNombre(user.nombre)
         setCorreo(user.correo)
         setTelefono(user.telefono)
@@ -35,7 +40,7 @@ export default EditarUsuario = ( ) => {
     })()
   },[])
 
-  // funciones de cambios en los input
+  // funciones de cambios en los input y validaciones de los campos
   function cambiarnombre(value) {
     setNombre(value)
     if (value.trim() == '') {
@@ -61,12 +66,14 @@ export default EditarUsuario = ( ) => {
     }
   }
 
-  // funcion seguiente
+  // funcion para hacer la solicitud al servidor para actualizar al usuario
   const handleFunction = async () => {
+    // verificar los errores en los campos
     if (await verificarE()) {
       Alert.alert('porfavor', 'Por favor, corrija los errores en los campos')
       return;
     }
+    // preparacion para actualizar el usuario
     let Emprendedor= {
         "id":id,
         "nombre":nombre ,
@@ -76,6 +83,7 @@ export default EditarUsuario = ( ) => {
         "Id_descripcionNegocio":descripcionNegocio
     }
     try{
+        // peticion al servidor
         await axios.put(`${ipdelservidor}/ModificarEmprendedor/${id}`,Emprendedor)
         Alert.alert('Exito', 'Usuario modificado correctamente')
         limpiarCampos()
@@ -83,6 +91,7 @@ export default EditarUsuario = ( ) => {
         
     }
   }
+  // verificar los errores en los campos false si no hay errores true si los hay
   async function verificarE() {
    let errores = false;
   setNombreE('');
@@ -111,6 +120,7 @@ export default EditarUsuario = ( ) => {
   }
   return (
     <View style={styles.container}>
+      {/* llamada a los input perzonalizados */}
       <Inputt
         name='Nombre'
         onChangeText={(value) => { cambiarnombre(value) }}

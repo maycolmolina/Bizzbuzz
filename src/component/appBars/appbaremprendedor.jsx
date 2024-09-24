@@ -1,8 +1,14 @@
+// menu del emprendedor donde se mostraran las acciones del emprendedor
+
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { Link, useLocation } from "react-router-native";
+// impotacion de los colores o tema de la aplicación
 import { colors } from "../../theme/colors";
+// importaciones de los iconos para generar el menu
 import {Emailicons, Shoticons,Agendaicons, Homeicons,Config, Helpicons, GoogleMaps,Notifications ,Capture,Cameraicon} from '../../icons/iconos'
+
+// constante que guarda a cada uno de los iconos importados
 const icons = {
   'agenda': Agendaicons,
   'home': Homeicons,
@@ -15,6 +21,7 @@ const icons = {
   'camera': Cameraicon,
   'email': Emailicons,
 }
+//componente encargado de generar cada opcion del menu principal
 const AppbartabIcon = ({ to, style, nameicon }) => {
   const { pathname } = useLocation()
   const active = pathname === to
@@ -32,26 +39,6 @@ const AppbartabIcon = ({ to, style, nameicon }) => {
     </View>
   )
 }
-const Appbartab = ({ children, to, style }) => {
-  const { pathname } = useLocation();
-  const active = pathname === to;
-  const estilos = [
-    style,
-    active == true && styles.active,
-    active == false && styles.inactive,
-  ];
-  return (
-    <View style={style}>
-      <Link to={to}>
-        <Text style={estilos}>
-          {children}
-        </Text>
-      </Link>
-    </View>
-  );
-};
-
-
 
 
 

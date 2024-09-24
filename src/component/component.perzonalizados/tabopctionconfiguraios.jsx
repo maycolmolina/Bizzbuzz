@@ -2,6 +2,9 @@ import {TouchableOpacity,Text,View,StyleSheet} from 'react-native'
 import {Emailicons, Shoticons,Agendaicons, Homeicons,Config, Helpicons, GoogleMaps,Notifications ,Capture,Pencilicons,Cameraicon,Closeicon} from '../../icons/iconos'
 import { colors } from '../../theme/colors'
 import { useNavigate } from 'react-router-native'
+
+
+// importacion de iconos
 const icons = {
   'agenda': Agendaicons,
   'home': Homeicons,
@@ -16,6 +19,8 @@ const icons = {
   'close': Closeicon,
   'pencil': Pencilicons,
 }
+
+// componente que genera algunas opciones ya sea del cliente o el emprendedor en el apartado de configuración
 export default  OpcionesSettings = ({ruta,onpress,text,nameicon}) => {
     const ir =useNavigate()
     const Iconloas = icons[nameicon]

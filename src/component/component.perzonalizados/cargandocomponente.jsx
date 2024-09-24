@@ -1,7 +1,7 @@
 import { View,Text,StyleSheet } from 'react-native'
 import { colors } from '../../theme/colors'
 
-
+// componente reutilizable que aparecera en la app cada vez que se este realizando una peticion al servidor
 export default function Loadincomponet({texto}) {
     return (
         <View style={styles.espera}>

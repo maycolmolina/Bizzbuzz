@@ -9,7 +9,10 @@ import { useNavigate } from 'react-router-native'
 import ipdelservidor from '../../servidorconnect/ipdelservidor'
 
 export default descripcionNegocioScreen = ({ navigation, route }) => {
+    // en esta linea de abajo capturamos los parametros del usuario para unirlos con los datos que escribamos en este
+    // formulario y mandarlos a la base de datos y terminar el registro 
     const { nombre, correo, password, telefono, paistelefono } = route.params
+    // campos del negocio 
     const [nombreNegocio, setNombreNegocio] = useState('')
     const [direccion, setDireccion] = useState('')
     const [descripcion, setDescripcion] = useState('')
@@ -25,6 +28,8 @@ export default descripcionNegocioScreen = ({ navigation, route }) => {
     const [verificacionE, setVerificacionE] = useState('')
 
     useEffect(() => {
+        // ya que el numero de telefono lo mandamos separado unimos el numero con el codigo de entrada y salida del paistelefono 
+        // para enviar la informacion en un solo campo
         setTelefonoListo(paistelefono + telefono)
     }, [])
 
@@ -59,7 +64,7 @@ export default descripcionNegocioScreen = ({ navigation, route }) => {
         setVerificacion(value)
     }
 
-
+    // verificacion de  errores 
     async function verificarE() {
         let errores = false;
 
@@ -84,6 +89,9 @@ export default descripcionNegocioScreen = ({ navigation, route }) => {
         return errores;
 
     }
+
+    // funcion final de registro de emprendedor donde todos los datos 
+    // se consolidan y se envian a la base de datos 
     const enviarInformacion = async () => {
         // verificar los datos antes de enviarlos al backend
         if (await verificarE()) {
@@ -91,6 +99,7 @@ export default descripcionNegocioScreen = ({ navigation, route }) => {
             return;
         }
         setLoading(true)
+        // preparamos los datos del negocio y el emprendedor 
         let data = {
             Emprendedor: {
                 nombre,
@@ -106,13 +115,10 @@ export default descripcionNegocioScreen = ({ navigation, route }) => {
             }
         }
         try {
-            const response = await axios.post(ipdelservidor+'/useremprendedor.json', data);
+            //  enviamos los dato al servidor para su registro
+            const response = await axios.post(ipdelservidor+'3000/useremprendedor.json', data);
             if (response.status === 201) {
-                setModalVisible(true)
-                setNombreNegocio('')
-                setDireccion('')
-                setDescripcion('')
-                setVerificacion('')
+                
                 saveData(JSON.stringify(data));
                 ruta.navigate('/')
             }
@@ -158,7 +164,11 @@ export default descripcionNegocioScreen = ({ navigation, route }) => {
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => setModalVisible(false)}
-            >
+            >setModalVisible(true)
+                setNombreNegocio('')
+                setDireccion('')
+                setDescripcion('')
+                setVerificacion('')
                 <View style={styles.modalView}>
                     <Text style={styles.modalText}>Datos del emprendedor y negocio enviados correctamente</Text>
                     <Button title='Cerrar' onPress={() => setModalVisible(false)} />
